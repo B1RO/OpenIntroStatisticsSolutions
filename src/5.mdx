@@ -1,3 +1,5 @@
+import {RSnippet} from "./RSnippet.tsx"
+
 # CHAPTER 5. FOUNDATIONS FOR INFERENCE
 ## 5.3 Hypothesis testing for a proportion
 ### 5.15
@@ -45,6 +47,71 @@ b) Yes, the confidence interval in hours is (2.1h,2.45h), so 2.2 hours is quite 
 
 c) Yes, because the 99% confidence interval would be even wider
 
+### 5.21
+The null hypothesis should be that 50% of adults believe that increasing the minimum wage would help the economy.
+$H_0: p = 0.5$
+The alternative hypothesis should be that it is different from 50%.
+$H_1: p \neq 0.5$
+
+<RSnippet code={
+    `#Compute standard error
+null_value <- 0.5
+standard_error <- sqrt((null_value)*(1-null_value)/1000);
+
+#Compute z score
+point_estimate <- 0.42;
+z_score <- (point_estimate - null_value)/standard_error;
+print(paste("z score is: ", z_score));
+
+#And the p_value
+p_value <- 2*pnorm(z_score);
+print(paste("p value is: ", p_value));`
+}/>
 
 
+
+### 5.22
+The null hypothesis is that 50% of students got enough sleep, alternative is that it is different from 50%.
+<RSnippet code={
+    `#Compute standard error
+null_value <- 0.5
+standard_error <- sqrt((null_value)*(1-null_value)/400);
+
+#Compute z score
+point_estimate <- 289/400;
+z_score <- (null_value-point_estimate)/standard_error;
+
+#And the p_value
+p_value <- 2*pnorm(z_score);
+print(paste("p value is: ", p_value));`
+}/>
+
+
+### 5.23
+<RSnippet code={
+`#Compute 0.025 quantile
+quantile <- qnorm(0.025)
+print(quantile)
+
+#Compute standard error
+se <- sqrt(0.3*0.7/90)
+
+#Compute sample proportion
+sample_proportion <- quantile*se + 0.3
+print(sample_proportion)
+`
+}/>
+
+### 5.24
+<RSnippet code={
+    `#Compute 0.025 quantile
+quantile <- qnorm(0.005)
+#Compute standard error
+se <- sqrt(0.9*0.1/1429)
+
+#Compute sample proportion
+sample_proportion <- quantile*se + 0.9
+print(sample_proportion)
+`
+}/>
 
