@@ -1,0 +1,158 @@
+import {RSnippet} from "./RSnippet.tsx";
+
+# CHAPTER 6. INFERENCE FOR CATEGORICAL DATA
+## 6.1 Hypothesis testing for a proportion
+### 6.1
+a) False, because the success-failure condition is not satisfied.
+b) True
+c) False
+d) True
+e) False, it would be reduced by sqrt(2)
+
+### 6.2
+a) True
+b) True, but because the success-failure condition is satisfied
+c)  False. A random sample of 60 young Americans where 85% think they can achieve the American dream,
+would have standard error of sqrt(0.77*0.23/60) = 0.054, with z score equal to 1.48148148 which is not
+that unusual/unlikely.
+<RSnippet code={`print(2*(1-pnorm(1.48)))`}/>
+The p value is 0.13
+d) True, here we get standard error of sqrt(0.77*0.23/60) = 0.038, with z score equal to 2
+<RSnippet code={`print(2*(1-pnorm(2)))`}/>
+The p value is 0.04
+which is unlikely.
+
+### 6.3
+a) True
+b) True
+c) True
+d) True
+
+### 6.4
+a) True
+b) True
+c)
+<RSnippet code={`SE <- sqrt(0.25*0.75/50)
+z <- (0.2-0.25)/SE
+p <- 2*pnorm(z)
+c(SE=SE,z=z,p=p)`
+}/>
+d)
+False
+<RSnippet code={`SE <- sqrt(0.25*0.75/150)
+z <- (0.2-0.25)/SE
+p <- 2*pnorm(z)
+c(SE=SE,z=z,p=p)`
+}/>
+False
+e)
+False
+
+### 6.5
+a) False, in this sample 82% of the respondents think it's the government's responsibility to promote equality
+b) True, the confidence interval is a statement about the whole population not the sampel we collected, that is why a) is false and b) is true
+c) True
+d) True
+e) True
+
+### 6.6
+a)
+<RSnippet code={`
+SE <- sqrt(0.66*0.34/1018)
+margin_of_error <- 1.96*SE
+margin_of_error
+`}/>
+b)
+No
+
+### 6.7
+<RSnippet code={`
+SE <- sqrt(0.56*0.44/600)
+margin_of_error <- 1.96*SE
+margin_of_error
+`}/>
+
+### 6.8
+a) The population parameter of interest is the proportion of greeks who would consider their life suffering. The value is 0.25
+b) The greek data points are independent and the success-failure condition is satisfied (0.25*1000 > 10 and 0.75*1000 > 10)
+c)
+<RSnippet code={
+`SE <- sqrt(0.25*0.75/1000)
+margin_of_error <- 1.96*SE
+confidence_interval <- c(0.25-margin_of_error,0.25+margin_of_error)
+confidence_interval
+`}/>
+d)A higher confidence level would widen the confidence interval
+e) A larger sample size would make the confidence interval narrower
+
+### 6.9
+a) No, because this sample only includes those who took SAT.
+b)
+<RSnippet code={`SE <- sqrt(0.55*0.45/1509)
+confidence_interval <- c(0.55-1.664*SE,0.55+1.664*SE)
+confidence_interval
+`}/>
+c) If we repeated this sample collection many times, the proportion would in 90% of times be inside the interval
+d) It would be appropriate to claim that majority of high school seniors who took SAT want to participate in study abroad program.
+
+### 6.10
+a) Sample statistic
+
+b)
+<RSnippet code={`
+SE <- sqrt(0.61*0.39/1578)
+confidence_interval <- c(0.61-1.96*SE,0.61+1.96*SE)
+`}/>
+c) Assuming the data are independent (the residents were selected in a random way), the success-failure condition is satisfied (0.61*1578 > 10 and 0.39*1578 > 10), so the confidence interval is valid.
+d) Yes
+
+### 6.11
+a)
+<RSnippet code={`
+SE <- sqrt(0.55*0.45/617)
+confidence_interval <- c(0.55-1.96*SE,0.55+1.96*SE)
+`}/>
+The confidence interval is (0.51,0.59), hence it is reasonable to claim that majority of Independents support a National Health Plan.
+b) No, because the margin of error is 0.04, and it would need to be at least 0.5 for the other confidence interval to contain 0.5
+
+### 6.12
+a)
+Null hypothesis: 50% of americans who decide not to go to college do so because of financial reasons
+Alternative hypothesis: The percentage of americans who decide not to go to college because of financial reasons is different from 50%
+
+<RSnippet code={`
+SE <- sqrt(0.5*0.5/331)
+z_score <- (0.48-0.5)/SE
+p_value <- 2*pnorm(z_score)
+`}/>
+
+the p value is 0.48, so we fail to reject the null hypothesis - it seems that about 50% of americans who decide not to go to college do so because of financial reasons.
+b) Yes, the sample size is not that large and 48% is near the 50% mark.
+
+### 6.13
+a) To answer this question we need to do a hypothesis test.
+Null hypothesis: People randomly guess, that is the true proportion of correct answers p = 0.5
+Alternative hypothesis: People do not randomly guess, that is the true proportion of correct answers p != 0.5
+
+<RSnippet code={`
+SE <- sqrt(0.5*0.5/80)
+z_score <- (0.5-(53/80))/SE
+p_value <- 2*pnorm(z_score)
+`}/>
+
+The p value is very small, hence we reject the null hypothesis. It seems to be the case that people do not randomly guess.
+b) The p value of 0.003 indicates that there is about 0.3% chance of seeing people randomly have this many correct answers if they were just guessing.
+
+### 6.14
+a)
+<RSnippet code={`
+SE <- sqrt(0.48*0.52/331)
+confidence_interval <- c(0.48-1.96*SE,0.48+1.96*SE)
+`}/>
+
+The confidence interval is (0.42,0.54), hence we can't really say that either majority or minority of americans who decide not to go to college do so because of financial reasons.
+b) To get margin of error of about 1.5%, we get equation $e = SE \cdot 1.96 = \sqrt\{\frac\{p \cdot (1-p)\}\{n\}\} \cdot 1.96$.
+So $n = \frac\{p \cdot (1-p) \cdot (1.96)^2\}\{e^2\}$
+Substituting $p = 0.48$ and $e = 0.015$, we get:
+$n = \frac\{0.48 \cdot (1-0.48) \cdot (1.96)^2\}\{0.015^2\} \approx 858$
+

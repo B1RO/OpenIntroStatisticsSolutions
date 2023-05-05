@@ -115,3 +115,98 @@ print(sample_proportion)
 `
 }/>
 
+### 5.25
+Null hypothesis : No change in my symptomps will occur.
+Alternative hypothesis: anti-depressants will either help or cause harm.
+Type 1 error would be to reject the null hypothesis when it is true, i.e. to believe that symptomps have improved/worsened when they didn't.
+Type 2 error would be to accept the null hypothesis when it is false, i.e. to believe that symptomps haven't changed when they did.
+
+### 5.26
+a) The standard error decreases as sample size increases. This can be seen from the formula $SE = \sqrt\{\frac\{p(1-p)\}\{n\}\}$. Hence it is larger in scenario I
+b) The margin of error of a confidence interval decreases as confidence level decreases. Hence it is larger in scenario I
+c) As the number of samples increases, the confidence interval becomes narrower. Hence the p value is larger in scenario I with less samples.
+d) As the significance level increases, we become more lenient and the probability of accepting the null hypothesis even though it is false increases. Hence II
+
+### 5.27
+a) If we repeated this study many times, in 95% of the cases, the mean number of hours spent relaxing would be between (1.38, 1.92)
+b) If there was increase in the margin of error, then confidence level had to be increased.
+c) The margin of error should decrease.
+
+### 5.28
+<RSnippet code={
+    `SE <- sqrt(0.42*0.58/1000)
+    confidence_interval = c(0.42-SE*2.58, 0.42+SE*2.58)`
+}/>
+
+### 5.29
+a) Null hypothesis: The regulations are being met
+   Alternative hypothesis: The regulations are not being met
+b) Type 1 error: The regulator rejects the null hypothesis, that is concludes that regulations are not being met, even though they are.
+c) Type 2 error: The regulator accepts the null hypothesis, that is concludes that regulations are being met, even though they are not.
+d) Type 1 is more problematic for restaurant owner, because their license will be revoked even though they are meeting the regulations.
+e) Type 2  more problematic for the diners, because they will be eating in a restaurant that is not meeting the regulations.
+f) As a diner I would prefer strong evidence, not very strong evidence, becaues such approach would lead less of type two error.
+
+### 5.30
+a) Yes, because the 95% confidence interval is a subset of the 99% confidence interval.
+b) No decreasing the significance level will decrease the probability of making a Type 1 Error, as we need stronger evidence to reject the null hypothesis.
+c) Not necessarily, but there is lack of evidence to say that is is not.
+d) Yes
+
+### 5.31
+a) Null: The proportion of unemployed people and underemployed people who had relationship problems were the same.
+   Alternative: The proportion of unemployed people and underemployed people who had relationship problems were different.
+b) We fail to reject the null hypothesis, and fail to conclude that they were different.
+
+### 5.32
+Null hypothesis is that nearsightedness affects 8% of population. $p = 0.08$
+Alternative hypothesis is that it affects more or less than 8% of population. $p \neq 0.08$
+
+<RSnippet code={
+    `#Compute standard error
+null_value <- 0.08
+standard_error <- sqrt((null_value)*(1-null_value)/194);
+
+#Compute z score
+point_estimate <- 21/194;
+z_score <- (null_value-point_estimate)/standard_error;
+
+#And the p_value
+p_value <- 2*pnorm(z_score);
+print(paste("p value is: ", p_value));`
+}/>
+
+p value is 0.146 so we fail to reject the null hypothesis, the data we collected do not provide evidence that the 8% value is inaccurate.
+
+### 5.33
+Since the confidence interval contains the reported value, there is no evidence that the reported value is inaccurate.
+
+### 5.34
+The sampling distribution is the probability distribution of the statistic we are measuring.
+As the sample size increases, the distribution gets narrower in the center and taller, and the standard error decreases.
+
+### 5.35
+The statement is true. With large sample size, the standard error gets very small, hence for the z value to be large, it is enough to detect a small difference between the null value and the sample value.
+
+### 5.36
+The p value will likely decrease. As explained in the previous exercises, an increase in sample size yields narrower distribution hence the tails get thinner and the area corresponding to the previously reported p value will be smaller.
+
+### 5.37
+a) The null hypothesis is that the proportion of men who are paid more than women is 0.5.
+The alternative hypothesis is that the proportion of men who are paid more than women is different from 0.5
+
+<RSnippet code={
+    `#Compute standard error
+null_value <- 0.5
+standard_error <- sqrt((null_value)*(1-null_value)/21);
+
+#Compute z score
+point_estimate <- 19/21;
+z_score <- (null_value-point_estimate)/standard_error;
+
+#And the p_value
+p_value <- 2*pnorm(z_score);
+print(paste("p value is: ", p_value));`
+}/>
+
+p value is 0.000207501594061833, so we reject the null hypothesis and conclude that the proportion of men who are paid more than women is different than 50%.

@@ -30,13 +30,22 @@ export function RSnippet({code}: { code : string}) {
     const [result, setResult] = React.useState<string | null>(null);
     const [error, setError] = React.useState<string | null>(null);
     //@ts-ignore
-    console.log(result?result.toArray():result)
     return <RootDiv>
-        <Editor theme={"vs-dark"} height="16rem" language="r" value={code}  />
+        <Editor options={{
+            readOnly: true,
+            scrollbar: {
+                vertical: 'hidden'
+            },
+            minimap: { enabled: false },
+        }} theme={"vs-dark"} height="16rem" language="r" value={code}  />
         <RunButton onClick={() => {
-            webR.evalR(code).then(setResult).catch(setError)
+            webR.evalR(code).then(async (x : any)=>{
+                const out =  await x.toArray();
+                setResult(out.join("\n"))
+            }).catch(setError)
         }}>
             Run
         </RunButton>
+        {result}
     </RootDiv>
 }
