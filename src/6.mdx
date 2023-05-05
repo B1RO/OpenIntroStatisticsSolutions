@@ -156,3 +156,64 @@ So $n = \frac\{p \cdot (1-p) \cdot (1.96)^2\}\{e^2\}$
 Substituting $p = 0.48$ and $e = 0.015$, we get:
 $n = \frac\{0.48 \cdot (1-0.48) \cdot (1.96)^2\}\{0.015^2\} \approx 858$
 
+### 6.17
+Because both categories fail the success-failure condition.
+### 6.18
+The control group is too small and fails the success-failure condition.
+
+### 6.19
+a) False
+b) True
+c) True
+d) True
+e) False
+
+### 6.20
+a) False
+b) False, it is the other way around
+c) False, it would be narrower
+d) True
+
+### 6.21
+<RSnippet code={`SE = sqrt(0.79*0.21/347 + 0.55*0.45/617)
+difference = 0.79-0.55
+confidence_interval <- c(difference-1.96*SE, difference+1.96*SE)`
+}/>
+
+We are 95% confident that the true difference in proportions of Independents and Democrats who support a National Health Plan is between 0.18 and 0.29.
+b) True
+
+### 6.22
+<RSnippet code={`
+SE <-sqrt(0.08*0.92/11545 + 0.088*0.912/4691)
+difference = 0.08-0.088
+confidence_interval <- c(difference-1.96*SE, difference+1.96*SE)
+`}/>
+
+This confidence interval doesn't allow us to conclude anything.
+
+### 6.23
+a) College: 104/438 = 0.237 Non-College: 131/389 = 0.33
+b)
+Null hypothesis: The difference in proportions is 0
+Alternative hypothesis: The difference in proportions is not 0
+<RSnippet code={`
+SE <-sqrt(0.24*0.76/438 + 0.33*0.67/380)
+difference = 0.24-0.33
+z_score <- difference/SE
+p_value <- 2*pnorm(z_score)
+`}/>
+The p value is below the significance level of 5% and hence we reject the null hypothesis.
+
+### 6.24
+a) The samples are random and independent, and the success-failure condition is satisfied (0.08*11454 > 10 and 0.088*4691 > 10), so we can assume that the sample distribution is normal.
+Our null hypothesis H0 is that the difference in proportions is 0, and the alternative hypothesis H1 is that the difference in proportions is not 0.
+<RSnippet code={`
+SE <-sqrt(0.08*0.92/11545 + 0.088*0.912/4691)
+difference = 0.08-0.088
+z_score <- difference/SE
+p_value <- 2*pnorm(z_score)
+`}/>
+The p value is above the significance level hence we fail to reject the null hypothesis. It seems that the difference in proportions is 0.
+b) Type 2 error could have been made.
+
