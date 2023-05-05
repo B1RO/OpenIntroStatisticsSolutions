@@ -229,3 +229,47 @@ b) <RSnippet code={`1-pchisq(10, df=5)`}/>
 True, the p value is 0.07 which is above the 5% significance level
 c) False, we only shade the right tail
 d) True
+
+### 6.33
+a) Null hypothesis: The students of his class were sampled from the distribution where 60% purchase hard copy, 25% print it and 15% read it online.
+   Alternative hypothesis: The students of his class were not sampled from the distribution where 60% purchase hard copy, 25% print it and 15% read it online.
+b) He expected 75.6 students to buy a hard copy, 31.5 to print it and 18.9 to read it online.
+c) There are two conditions: each data point must be independent and each scenario has to have at least 5 expected cases.
+Both conditions are satisfied.
+d)
+<RSnippet code={`
+degrees_of_freedom <- 2
+chi_squared = (71-75.6)^2/75.6 + (30-31.5)^2/30 + (25-18.9)^2/18.9
+p_value <- 1-pchisq(chi_squared, df=degrees_of_freedom)
+`}/>
+e)
+The p value is ~0.3  and hence we fail to reject the null hypothesis.
+As such we can't conclude that the students of his class were not sampled from the distribution where 60% purchase hard copy, 25% print it and 15% read it online.
+
+### 6.34
+a) Null hypothesis: Barking deer are indifferent to the type of habitat. That is we would expect the number of sites where they forage
+to correspond to the frequency of these lands in china.
+   Alternative hypothesis: Barking deer are not indifferent to the type of habitat.
+b) Chi-square test
+c) We do not know how the measurements were selected but for the sake of exercise we will assume that they were independent.
+   The success-failure condition is not satisfied, as woods only contain 4 data points.
+d)
+<RSnippet code={`
+degrees_of_freedom <- 3
+total <- 426
+woods_measured <- 4
+woods_expected <- total * 0.048
+grassplot_measured <- 16
+grassplot_expected <- total * 0.147
+deciduous_forest_measured <- 61
+deciduous_forest_expected <- total * 0.396
+other <- 345
+other_expected <- total * 0.409
+chi_squared <- (woods_measured-woods_expected)^2/woods_expected + (grassplot_measured-grassplot_expected)^2/grassplot_expected + (deciduous_forest_measured-deciduous_forest_expected)^2/deciduous_forest_expected
+p_value <- 1-pchisq(chi_squared, df=degrees_of_freedom)
+`}/>
+
+Yes, the p value is below the significance level of 5% and hence we reject the null hypothesis. As such we conclude that Barking deer are not indifferent to the type of habitat.
+
+
+
